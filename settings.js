@@ -8,7 +8,7 @@ function call_script_on_page(scriptName) {
                 files: [scriptName],
             });
         }
-        });
+    });
 }
 
 // Saves options to chrome.storage

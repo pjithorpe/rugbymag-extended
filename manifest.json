@@ -7,10 +7,22 @@
     },
     "permissions": ["storage", "activeTab", "scripting"],
     "action": {
-        "default_popup": "settings_popup.html"
+        "default_popup": "settings_popup.html",
+        "default_icon": {
+            "16": "/img/logo_16.png",
+            "32": "/img/logo_32.png",
+            "48": "/img/logo_64.png",
+            "128": "/img/logo_128.png"
+        }
     },
     "content_scripts": [{
         "matches": ["https://therugbymagazine.com/fantasy*team*gameweek*"],
         "js": ["totalScores.js"]
-    }]
+    }],
+    "icons": {
+        "16": "/img/logo_16.png",
+        "32": "/img/logo_32.png",
+        "48": "/img/logo_64.png",
+        "128": "/img/logo_128.png"
+    }
 }
