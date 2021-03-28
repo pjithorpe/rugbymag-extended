@@ -1,0 +1,104 @@
+body {
+    min-width: 250px;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+    vertical-align:middle;
+}
+
+.switchContainer {
+    color: #444;
+    cursor: auto;
+    font-style: normal;
+    line-height: 32px;
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    float: left;
+    margin: 0;
+    padding: 0;
+    border-radius: 2px;
+    /*font-family: "brandon-grotesque","niveau-grotesk","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;*/
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+}
+
+.switch {
+    box-sizing: border-box;
+    color: #4d4c4c;
+    cursor: pointer;
+    font-size: .875rem;
+    font-weight: 300;
+    line-height: 1.5;
+    border: none;
+    outline: 0;
+    padding: 0;
+    user-select: none;
+    position: relative;
+    display: inline-block;
+    width: 60px !important;
+    height: 32px !important;
+    float: right;
+    margin: 0;
+    transform: scale(0.75);
+}
+
+input {
+    user-select: none;
+    box-sizing: border-box;
+    margin: 0 0 1rem 0;
+    left: 10px;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 9px;
+    display: none;
+}
+
+input ~ .roundSlider {
+    color: #4d4c4c;
+    font-size: .875rem;
+    font-weight: 300;
+    line-height: 1.5;
+    user-select: none;
+    box-sizing: border-box;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 28px;
+}
+
+input:checked ~ .roundSlider {
+    background-color: #2e68b7;
+}
+
+input ~ .roundSlider::before {
+    background-color: rgb(255, 255, 255);
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    bottom: 4px;
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    height: 24px;
+    left: 4px;
+    position: absolute;
+    transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all;
+    transition-timing-function: ease;
+    width: 24px;
+}
+
+input:checked ~ .roundSlider::before {
+    transform: matrix(1, 0, 0, 1, 28, 0);
+}
