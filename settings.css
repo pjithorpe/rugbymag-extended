@@ -18,7 +18,6 @@ body {
     margin: 0;
     padding: 0;
     border-radius: 2px;
-    /*font-family: "brandon-grotesque","niveau-grotesk","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;*/
     font-size: 0.8rem;
     text-transform: uppercase;
     font-weight: 700;
@@ -37,7 +36,6 @@ body {
     padding: 0;
     user-select: none;
     position: relative;
-    display: inline-block;
     width: 60px !important;
     height: 32px !important;
     float: right;
@@ -81,10 +79,7 @@ input:checked ~ .roundSlider {
 
 input ~ .roundSlider::before {
     background-color: rgb(255, 255, 255);
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    border-top-left-radius: 50%;
-    border-top-right-radius: 50%;
+    border-radius: 50%;
     bottom: 4px;
     box-sizing: border-box;
     content: "";
