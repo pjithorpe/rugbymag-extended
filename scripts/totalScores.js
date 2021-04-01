@@ -6,14 +6,26 @@ function show_live_total() {
         if (items.liveScoresSetting) {
             const lockedInScores = Array.from(document.getElementsByClassName('points complete'));
             const provisionalScores = Array.from(document.getElementsByClassName('points provisional'));
-            const allScores = lockedInScores.concat(provisionalScores);
+            const cancelledScores = Array.from(document.getElementsByClassName('points cancelled'));
+            const allScores = lockedInScores.concat(provisionalScores).concat(cancelledScores);
 
             if (allScores.length > 0) {
                 var total = 0;
                 allScores.forEach(scoreElement => {
-                    total += parseInt(scoreElement.textContent.trim(), 10);
+                    // try to detect strange elements elsewhere on the page that have a 'points' class, so we can ignore them
+                    if (!(scoreElement.classList.contains('column') || scoreElement.classList.length > 3)) {
+                        // add points to total
+                        total += parseInt(scoreElement.textContent.trim(), 10);
+                    }
                 });
-                const gameweekPointsElement = document.querySelector("body > section.user-squad.thin > div:nth-child(2) > div.small-12.column.right > div.row.stats > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > div.small-5.column.text-right");
+
+                // Find the fields in the heading stats block
+                const gameweekStatsFields = document.getElementsByClassName('row stats')[0].children[0].children[1].children[0].children;
+                // Find the gameweek points field
+                const gameweekPointsField = Array.from(gameweekStatsFields).find(x => x.hasChildNodes && Array.from(x.children).some(y => y.textContent.includes('GW Points')));
+                // Get the element that actually contains the text with the points value
+                const gameweekPointsElement = Array.from(gameweekPointsField.children).find(x => x.classList.contains('text-right'));
+                // Add our calculated total
                 const totalPointsStr = gameweekPointsElement.textContent;
                 const valueIndex = totalPointsStr.search(/\S|$/); //searches for position of first non-whitespace char
                 gameweekPointsElement.textContent = totalPointsStr.slice(0, valueIndex) + "(~" + total.toString() + ") " + totalPointsStr.slice(valueIndex);
