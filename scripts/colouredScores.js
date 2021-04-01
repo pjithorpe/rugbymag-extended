@@ -26,18 +26,21 @@ function set_colour_from_score(element, value) {
             }
         }
 
-        if (value > 49) {
-            //Gold tier 50+ score, with a fancy gradient
-            element.classList.add('goldTier');
-            return;
+        if (value > 45) {
+            if (value > 49) {
+                //Gold tier 50+ score, with a fancy gradient
+                element.classList.add('goldTier');
+                return;
+            }
+            value = 45;
         }
-        else if (value < -10) {
-            value = -10;
+        else if (value < -5) {
+            value = -5;
         }
+        value += 5; // Maps our gradient values to the 0-50 range
     
-        value += 10; // So that our gradient goes all the way down to -10
-        const green = 255 * (value / 60);
-        const red = 255 * ((60 - value) / 60);
+        const green = 255 * (value / 50);
+        const red = 255 * ((50 - value) / 50);
         element.style.backgroundColor = 'rgb(' + red.toString() + ',' + green.toString() + ',0)';
     }
 }
