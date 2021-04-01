@@ -1,18 +1,24 @@
-function get_colour_from_score(value) {
+function set_colour_from_score(element, value) {
     if (value > 50) {
+        if (value > 60) {
+            //Gold tier score, with a fancy gradient
+            element.classList.add('goldTier');
+            return;
+        }
         value = 50;
     }
     else if (value < 0) {
         if (value < -5) {
             // Poo tier score
-            return 'rgb(92,64,51)';
+            element.style.backgroundColor = 'rgb(92,64,51)';
+            return;
         }
         value = 0;
     }
 
     const green = 255 * (value / 50);
     const red = 255 * ((50 - value) / 50);
-    return 'rgb(' + red.toString() + ',' + green.toString() + ',0)';
+    element.style.backgroundColor = 'rgb(' + red.toString() + ',' + green.toString() + ',0)';
 }
 
 function colour_scores() {
@@ -34,13 +40,7 @@ function colour_scores() {
                 if (scores.length > 0) {
                     scores.forEach(scoreElement => {
                         const score = parseInt(scoreElement.textContent.trim(), 10);
-                        if (score > 60) {
-                            //Gold tier score, with a fancy gradient
-                            scoreElement.style.background = 'radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%)';//, radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);';
-                        }
-                        else {
-                            scoreElement.style.backgroundColor = get_colour_from_score(score);
-                        }
+                        set_colour_from_score(scoreElement, score);
                     });
                 }
             }
