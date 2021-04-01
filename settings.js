@@ -12,13 +12,13 @@ function call_script_on_page(scriptName) {
 }
 
 // Saves options to chrome.storage
-function save_settings() {
-    const scoreTotalsOn = document.getElementById('changeLiveScoresSetting').checked;
+function save_setting(settingId) {
+    const turnedOn = document.getElementById(settingId).checked;
     chrome.storage.sync.set({
-        liveScoreTotals: scoreTotalsOn,
+        [settingId]: turnedOn,
     }, () => {
-        if (scoreTotalsOn) {
-            call_script_on_page('totalScores.js')
+        if (turnedOn) {
+            call_script_on_page(scriptMappings[settingId])
         }
         else {
             call_script_on_page('reloadPage.js')
@@ -29,12 +29,27 @@ function save_settings() {
 // Restores checkbox state using the preferences stored in chrome.storage.
 function restore_settings() {
     // default value = true
-    chrome.storage.sync.get({
-        liveScoreTotals: true,
-    }, (items) => {
-        document.getElementById('changeLiveScoresSetting').checked = items.liveScoreTotals;
-    });
+    for (const settingId in scriptMappings) {
+        chrome.storage.sync.get({
+            [settingId]: true,
+        }, (items) => {
+            // For all checkboxes
+            for (const settingId in scriptMappings) {
+                // Set checkbox to stored setting value
+                document.getElementById(settingId).checked = items[settingId];
+            }
+        });
+    }
+}
+
+const scriptMappings = {
+    'liveScoresSetting': 'scripts/totalScores.js',
+    'colouredScoresSetting': 'scripts/colouredScores.js'
 }
 
 document.addEventListener('DOMContentLoaded', restore_settings);
-document.getElementById('changeLiveScoresSetting').addEventListener('click', save_settings);
+// For all checkboxes
+for (const settingId in scriptMappings) {
+    // Add a listener that updates the relevant 
+    document.getElementById(settingId).addEventListener('click', () => save_setting(settingId));
+}
