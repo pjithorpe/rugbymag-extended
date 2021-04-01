@@ -1,0 +1,14 @@
+.smallScore {
+    cursor: auto;
+    font-family: "niveau-grotesk","Helvetica Neue",Helvetica,Roboto,Arial,sans-serif;
+    font-style: normal;
+    color: white;
+    text-align: center !important;
+    font-weight: 300;
+    box-sizing: border-box;
+    line-height: inherit;
+    font-size: 90%;
+    opacity: 0.7;
+    margin:0;
+    top:50%;
+}

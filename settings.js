@@ -44,7 +44,8 @@ function restore_settings() {
 
 const scriptMappings = {
     'liveScoresSetting': 'scripts/totalScores.js',
-    'colouredScoresSetting': 'scripts/colouredScores.js'
+    'colouredScoresSetting': 'scripts/colouredScores.js',
+    'modifiedScoresSetting': 'scripts/modifiedScores.js',
 }
 
 document.addEventListener('DOMContentLoaded', restore_settings);

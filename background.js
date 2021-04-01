@@ -1,6 +1,7 @@
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({ 
-        liveScoresSetting: true,
-        colouredScoresSetting: true,
+        liveScoresSetting: false,
+        colouredScoresSetting: false,
+        modifiedScoresSetting: false,
     });
 });

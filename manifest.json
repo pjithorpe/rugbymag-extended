@@ -17,8 +17,8 @@
     },
     "content_scripts": [{
         "matches": ["https://therugbymagazine.com/fantasy*team*gameweek*"],
-        "js": ["/scripts/totalScores.js", "/scripts/colouredScores.js"],
-        "css": ["/styles/colouredScores.css"]
+        "js": ["/scripts/totalScores.js", "/scripts/colouredScores.js", "/scripts/modifiedScores.js"],
+        "css": ["/styles/colouredScores.css", "/styles/modifiedScores.css"]
     }],
     "icons": {
         "16": "/img/logo_16.png",
