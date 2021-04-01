@@ -1,24 +1,38 @@
 function set_colour_from_score(element, value) {
-    if (value > 50) {
-        if (value > 60) {
-            //Gold tier score, with a fancy gradient
-            element.classList.add('goldTier');
-            return;
+    // try to detect strange elements elsewhere on the page that have a 'points' class, so we can ignore them
+    if (!(element.classList.contains('column') || element.classList.length > 3)) {
+        // check if the player has any 'checkers' (captain/kicker etc.),
+        const checkers = element.previousElementSibling?.children;
+        if (checkers && checkers.length > 0) {
+            // If this player is captain, divide the displayed score by 2
+            if (Array.from(checkers).some(x => x.classList.contains('captain'))) {
+                value /= 2;
+            }
         }
-        value = 50;
-    }
-    else if (value < 0) {
-        if (value < -5) {
-            // Poo tier score
-            element.style.backgroundColor = 'rgb(92,64,51)';
-            return;
-        }
-        value = 0;
     }
 
-    const green = 255 * (value / 50);
-    const red = 255 * ((50 - value) / 50);
+    if (value > 49) {
+        //Gold tier score, with a fancy gradient
+        element.classList.add('goldTier');
+        return;
+    }
+    else if (value < -10) {
+        value = -10;
+    }
+
+    value += 10; // So that our gradient goes all the way down to -10
+    const green = 255 * (value / 60);
+    const red = 255 * ((60 - value) / 60);
     element.style.backgroundColor = 'rgb(' + red.toString() + ',' + green.toString() + ',0)';
+}
+
+function set_colours(elements) {
+    if (elements && elements.length > 0) {
+        elements.forEach(scoreElement => {
+            const score = parseInt(scoreElement.textContent.trim(), 10);
+            set_colour_from_score(scoreElement, score);
+        });
+    }
 }
 
 function colour_scores() {
@@ -29,20 +43,17 @@ function colour_scores() {
         if (items.colouredScoresSetting) {
             const lockedInScores = Array.from(document.getElementsByClassName('points complete'));
             const provisionalScores = Array.from(document.getElementsByClassName('points provisional'));
+            const cancelledScores = Array.from(document.getElementsByClassName('points cancelled'));
+            const allScores = lockedInScores.concat(provisionalScores).concat(cancelledScores);
 
             // If we're looking at a live gameweek
-            if (lockedInScores.length > 0 || provisionalScores.length > 0) {
-                // todo
+            if (allScores.length > 0) {
+                set_colours(allScores);
             }
             else {
                 // If we're looking at a past gameweek
                 const scores = Array.from(document.getElementsByClassName('points'));
-                if (scores.length > 0) {
-                    scores.forEach(scoreElement => {
-                        const score = parseInt(scoreElement.textContent.trim(), 10);
-                        set_colour_from_score(scoreElement, score);
-                    });
-                }
+                set_colours(scores);
             }
         }
     });
