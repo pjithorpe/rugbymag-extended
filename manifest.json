@@ -1,7 +1,9 @@
 {
-    "name": "Rugby Magazine Fantasy Extended",
+    "name": "The Rugby Magazine Fantasy Extended",
     "version": "1.0",
     "manifest_version": 3,
+    "default_locale": "en",
+    "description": "Provides various minor ease-of-use and aesthetic tweaks to The Rugby Magazine's fantasy website. These features are provided to enhance the user experience on the website.",
     "background": {
         "service_worker": "background.js"
     },
