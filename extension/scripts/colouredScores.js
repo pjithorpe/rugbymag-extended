@@ -57,7 +57,7 @@ function set_colours(elements) {
 function show_coloured_scores() {
     // default value = true
     chrome.storage.sync.get({
-        colouredScoresSetting: true,
+        colouredScoresSetting: false,
     }, (items) => {
         if (items.colouredScoresSetting) {
             const lockedInScores = Array.from(document.getElementsByClassName('points complete'));

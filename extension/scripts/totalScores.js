@@ -1,7 +1,7 @@
 function show_live_total() {
     // default value = true
     chrome.storage.sync.get({
-        liveScoresSetting: true,
+        liveScoresSetting: false,
     }, (items) => {
         if (items.liveScoresSetting) {
             const lockedInScores = Array.from(document.getElementsByClassName('points complete'));

@@ -51,7 +51,7 @@ function get_modifications(elements) {
 function show_score_modifications() {
     // default value = true
     chrome.storage.sync.get({
-        modifiedScoresSetting: true,
+        modifiedScoresSetting: false,
     }, (items) => {
         if (items.modifiedScoresSetting) {
             const lockedInScores = Array.from(document.getElementsByClassName('points complete'));
