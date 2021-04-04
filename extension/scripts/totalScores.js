@@ -14,8 +14,18 @@ function show_live_total() {
                 allScores.forEach(scoreElement => {
                     // try to detect strange elements elsewhere on the page that have a 'points' class, so we can ignore them
                     if (!(scoreElement.classList.contains('column') || scoreElement.classList.length > 3)) {
-                        // add points to total
-                        total += parseInt(scoreElement.textContent.trim(), 10);
+                        const scoreElementText = scoreElement.textContent.trim();
+                        // Get all numbers in the text
+                        const numbers = [...scoreElementText.matchAll(/\-?[0-9]{1,3}/g)];
+                        let pointsText;
+                        if (numbers.length > 1) {
+                            // Get the second number, as this shows the actual player score
+                            pointsText = numbers[1][0];
+                        }
+                        else {
+                            pointsText = numbers[0][0];
+                        }
+                        total += parseInt(pointsText, 10);
                     }
                 });
 
